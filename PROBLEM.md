@@ -10,7 +10,7 @@ The engineer can:
 3. Stop the release altogether.
 
 ## The prediction
-The system predicts which of those three actions is appropriate, or abstains when the available evidence is insufficient. The prediction is not the release decision: the engineer remains responsible for making the final decision.
+The system predicts one of the three possible release actions as its recommendation, or abstains when the available evidence is insufficient. The prediction is not the release decision: the engineer remains responsible for making the final decision.
 
 ## The cost
 The costs are asymmetric and depend on the action recommended versus the action that was appropriate.
