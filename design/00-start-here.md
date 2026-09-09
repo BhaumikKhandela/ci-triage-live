@@ -1,7 +1,7 @@
 # Slice 00 — system boundary
 
 ## Responsibility
-Help the on-call engineer respond to a red CI build by predicting one appropriate release action or abstaining when the available evidence is insufficient.
+Help the on-call engineer respond to a red CI build by predicting one release action as a recommendation or abstaining when the available evidence is insufficient.
 
 ## Reads
 - Test logs from the failing CI run.
@@ -11,7 +11,7 @@ Help the on-call engineer respond to a red CI build by predicting one appropriat
 ## Emits
 - Exactly one recommendation: isolate the test and move forward with the release; rerun the CI pipeline; or stop the release.
 - Or an abstention when the system does not have sufficient evidence to make a recommendation.
-- Supporting evidence/explanation for the recommendation.
+- Supporting evidence/explanation drawn only from the permitted inputs.
 - The engineer remains responsible for the final release decision; the system does not execute the recommended action.
 
 ## Refuses
