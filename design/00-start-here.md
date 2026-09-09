@@ -6,6 +6,7 @@ Help the on-call engineer respond to a red CI build by predicting one release ac
 ## Reads
 - Test logs from the failing CI run.
 - The failing test.
+- Test history for the failing test.
 - The codebase.
 
 ## Emits
