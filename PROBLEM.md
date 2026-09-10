@@ -21,12 +21,14 @@ Currency is used as the cost unit because engineer time, CI compute, infrastruct
 | Ground-truth cause | Predicted cause | Recommendation | Consequence | Cost |
 |---|---|---|---|---:|
 | Genuine code/product failure | Flaky test | Isolate the test and release | A real defect may reach users, causing support tickets and user impact, followed by engineering remediation, CI, infrastructure, and redeployment costs. | $5,000 |
+| Genuine code/product failure | CI infrastructure/environment failure | Rerun the CI pipeline | The real bug is caught when the rerun fails, so the release is contained, but the pipeline wastes another cycle, developer feedback is delayed, and engineering time is spent waiting on a rerun that cannot resolve the underlying code failure. | $3,500 |
 | Flaky test | Genuine code/product failure | Stop the release | The release is unnecessarily delayed and engineers spend time reviewing the code and rerunning tests/CI before redeployment. There is no user-facing bad release cost. | $2,500 |
+| Flaky test | CI infrastructure/environment failure | Rerun the CI pipeline | The flaky failure may disappear on rerun, so the code ships without a product defect, but CI compute and engineer time are wasted and the pipeline is delayed. | $1,500 |
 | CI infrastructure/environment failure | Genuine code/product failure | Stop the release | The release is unnecessarily delayed and engineers incur code-review, test/CI rerun, and infrastructure/redeployment costs. | $2,500 |
-| CI infrastructure/environment failure | Flaky test | Isolate the test and release | Conditional: if subsequent CI passes and the release is unaffected, the cost is limited to investigation/CI/infrastructure work; if the failure recurs or the isolation masks a real issue, additional remediation and potentially user-facing costs occur. | Conditional; not yet numerically estimated |
+| CI infrastructure/environment failure | Flaky test | Isolate the test and release | The test result is inconclusive, so isolating it can become a blind release. If the code is buggy, a real defect may ship; if the code is clean, the valid infrastructure failure is still left unresolved. The working expected cost of this wrong action is estimated at $4,000. | $4,000 |
 | Any ground-truth cause | Abstain | Manual investigation | The engineer must independently investigate the failure and then make the release decision, in addition to the work required by the eventual action. | $3,750 |
 
-The abstention cost is non-zero but is not assumed to be more expensive than every wrong recommendation; its cost depends on the investigation and eventual action.
+The abstention cost is non-zero but is not assumed to be more expensive than every wrong recommendation; its cost reflects the manual investigation burden.
 
 ## Objective
 Minimize expected monetary cost across recommendations and abstentions, using the explicit monetary cost of abstention rather than a separate coverage constraint.
